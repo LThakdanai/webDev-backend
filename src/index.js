@@ -5,6 +5,7 @@ import pool from "./config/db.js";
 
 import userRoutes from "./routes/userRoutes.js";
 import errorHandling from "./middlewares/errorHandler.js";
+import createUserTable from "./data/createUserTable.js";
 
 env.config();
 
@@ -18,8 +19,12 @@ app.use(cors());
 // Routes
 app.use("/api", userRoutes);
 
+//create table before starting server
+createUserTable();
+
 //Error handling middleware
 app.use(errorHandling);
+
 //Testing Proges connection
 app.get("/", async (req, res) => {
   const result = await pool.query("SELECT current_database()");
