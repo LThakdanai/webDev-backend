@@ -5,7 +5,7 @@ const createProcessDataTable = async () => {
     runner_id INTEGER,
     product_number VARCHAR(50),
     time_stamp TIMESTAMP,
-    id INTEGER,
+    user_id INTEGER,
     ct1 FLOAT,
     ct2 FLOAT,
     ct3 FLOAT,
@@ -17,17 +17,14 @@ const createProcessDataTable = async () => {
     plt3 BOOLEAN,
     plt4 BOOLEAN,
     plt5 BOOLEAN,
-    status BOOLEAN,
-    PRIMARY KEY (runner_id, product_number, time_stamp),
-    FOREIGN KEY (runner_id, id) REFERENCES runner(runner_id, id),
-    FOREIGN KEY (product_number, id) REFERENCES product_data(product_number, id)
-);`;
+    status BOOLEAN
+  );`;
 
   try {
     await pool.query(queryText);
     console.log("Process table created if not exists");
   } catch (error) {
-    console.log("Error creating Process table :", error);
+    console.log("Error creating Process table:", error);
   }
 };
 

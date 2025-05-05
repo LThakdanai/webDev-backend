@@ -4,16 +4,14 @@ const createEFF_statTable = async () => {
   const queryText = `CREATE TABLE IF NOT EXISTS eff_stat (
     product_number VARCHAR(50),
     time_stamp TIMESTAMP,
-    id INTEGER,
+    user_id INTEGER,
     product VARCHAR(100),
     downtime INTERVAL,
     availability INTERVAL,
     eff FLOAT,
     performance FLOAT,
     quality FLOAT,
-    oee FLOAT,
-    PRIMARY KEY (product_number, time_stamp, id),
-    FOREIGN KEY (product_number, id) REFERENCES product_data(product_number, id)
+    oee FLOAT
 );
 `;
 

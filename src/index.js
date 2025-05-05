@@ -27,9 +27,9 @@ app.use("/api", userRoutes, dataRoutes);
 //create table before starting server
 createUserTable();
 createRunnerTable();
-//createProduct_dataTable();
-//createProcess_dataTable();
-//createEFF_statTable();
+createProcess_dataTable();
+createProduct_dataTable();
+createEFF_statTable();
 
 //Error handling middleware
 app.use(errorHandling);

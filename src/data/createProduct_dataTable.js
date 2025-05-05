@@ -4,15 +4,15 @@ const createProductDataTable = async () => {
   const queryText = `CREATE TABLE IF NOT EXISTS product_data (
     product_number VARCHAR(50),
     part_number VARCHAR(50),
-    id INTEGER,
+    user_id INTEGER,
     line VARCHAR(100),
     plan NUMERIC,
     actual NUMERIC,
     deflect NUMERIC,
     total_patch NUMERIC,
     total_actual NUMERIC,
-    PRIMARY KEY (product_number, part_number, id),
-    FOREIGN KEY (id) REFERENCES users(id)
+    PRIMARY KEY (product_number, part_number, user_id),
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );`;
 
   try {
