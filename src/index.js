@@ -7,6 +7,10 @@ import userRoutes from "./routes/userRoutes.js";
 import dataRoutes from "./routes/dataRoutes.js";
 import errorHandling from "./middlewares/errorHandler.js";
 import createUserTable from "./data/createUserTable.js";
+import createRunnerTable from "./data/createRunnerTable.js";
+import createProduct_dataTable from "./data/createProduct_dataTable.js";
+import createProcess_dataTable from "./data/createProcess_data(realtime)Table.js";
+import createEFF_statTable from "./data/createEFF_statTable.js";
 
 env.config();
 
@@ -22,6 +26,10 @@ app.use("/api", userRoutes, dataRoutes);
 
 //create table before starting server
 createUserTable();
+createRunnerTable();
+//createProduct_dataTable();
+//createProcess_dataTable();
+//createEFF_statTable();
 
 //Error handling middleware
 app.use(errorHandling);

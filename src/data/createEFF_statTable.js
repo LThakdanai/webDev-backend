@@ -4,7 +4,7 @@ const createEFF_statTable = async () => {
   const queryText = `CREATE TABLE IF NOT EXISTS eff_stat (
     product_number VARCHAR(50),
     time_stamp TIMESTAMP,
-    user_id INTEGER,
+    id INTEGER,
     product VARCHAR(100),
     downtime INTERVAL,
     availability INTERVAL,
@@ -12,16 +12,16 @@ const createEFF_statTable = async () => {
     performance FLOAT,
     quality FLOAT,
     oee FLOAT,
-    PRIMARY KEY (product_number, time_stamp, user_id),
-    FOREIGN KEY (product_number, user_id) REFERENCES product_data(product_number, user_id)
+    PRIMARY KEY (product_number, time_stamp, id),
+    FOREIGN KEY (product_number, id) REFERENCES product_data(product_number, id)
 );
 `;
 
   try {
     await pool.query(queryText);
-    console.log("Runner table created if not exists");
+    console.log("EFF table created if not exists");
   } catch (error) {
-    console.log("Error creating Runner table :", error);
+    console.log("Error creating EFF table :", error);
   }
 };
 

@@ -4,12 +4,11 @@ const createRunnerTable = async () => {
   const queryText = `CREATE TABLE IF NOT EXISTS runner (
     runner_id SERIAL,
     raw_video VARCHAR(255),
-    stamp_date TIMESTAMP,
+    stamp_date TIMESTAMP DEFAULT NOW(),
     user_id INTEGER,
     PRIMARY KEY (runner_id, user_id),
     FOREIGN KEY (user_id) REFERENCES users(id)
-);
-`;
+);`;
 
   try {
     await pool.query(queryText);
