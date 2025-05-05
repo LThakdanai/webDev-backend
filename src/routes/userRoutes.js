@@ -10,6 +10,7 @@ import validateUser from "../middlewares/inputValidator.js";
 
 const router = express.Router();
 
+//Authentication
 router.post("/users", createUser, validateUser);
 router.get("/users", getAllUsers);
 router.get("/users/:id", getUserById);

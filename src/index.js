@@ -4,6 +4,7 @@ import env from "dotenv";
 import pool from "./config/db.js";
 
 import userRoutes from "./routes/userRoutes.js";
+import dataRoutes from "./routes/dataRoutes.js";
 import errorHandling from "./middlewares/errorHandler.js";
 import createUserTable from "./data/createUserTable.js";
 
@@ -17,7 +18,7 @@ app.use(express.json());
 app.use(cors());
 
 // Routes
-app.use("/api", userRoutes);
+app.use("/api", userRoutes, dataRoutes);
 
 //create table before starting server
 createUserTable();
@@ -26,10 +27,10 @@ createUserTable();
 app.use(errorHandling);
 
 //Testing Proges connection
-app.get("/", async (req, res) => {
-  const result = await pool.query("SELECT current_database()");
-  res.send(`the database name is : ${result.rows[0].current_database}`);
-});
+//app.get("/", async (req, res) => {
+//  const result = await pool.query("SELECT current_database()");
+// res.send(`the database name is : ${result.rows[0].current_database}`);
+//});
 
 //Server running
 app.listen(port, () => {
