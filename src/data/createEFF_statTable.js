@@ -3,15 +3,19 @@ import pool from "../config/db.js";
 const createEFF_statTable = async () => {
   const queryText = `CREATE TABLE IF NOT EXISTS eff_stat (
     product_number VARCHAR(50),
-    time_stamp TIMESTAMP,
-    user_id INTEGER,
+    date_stamp DATE DEFAULT NOW(),
+    time_stamp TIME DEFAULT NOW(),
+    userId SERIAL,
     product VARCHAR(100),
     downtime INTERVAL,
     availability INTERVAL,
     eff FLOAT,
     performance FLOAT,
     quality FLOAT,
-    oee FLOAT
+    oee FLOAT,
+    FOREIGN KEY (product_number, date_stamp, time_stamp)
+      REFERENCES process_data(product_number, date_stamp, time_stamp),
+    FOREIGN KEY (userId) REFERENCES users(id)
 );
 `;
 
