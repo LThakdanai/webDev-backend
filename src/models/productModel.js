@@ -39,3 +39,19 @@ export const getAllSumDefectService = async (id, date_stamp) => {
   );
   return result.rows[0];
 };
+
+export const getEffService = async (id, date_stamp) => {
+  const result = await pool.query(
+    "SELECT (SUM(actual) * 100.0 / NULLIF(SUM(plan), 0)) AS ActualPlan_percentage FROM product_data WHERE userId = $1 AND date_stamp = $2",
+    [id, date_stamp]
+  );
+  return result.rows[0];
+};
+
+export const getlineEffService = async (id, date_stamp, line) => {
+  const result = await pool.query(
+    "SELECT (SUM(actual) * 100.0 / NULLIF(SUM(plan), 0)) AS Line_ActualPlan_percentage FROM product_data WHERE userId = $1 AND date_stamp = $2 AND line = $3",
+    [id, date_stamp, line]
+  );
+  return result.rows[0];
+};

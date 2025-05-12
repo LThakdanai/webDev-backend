@@ -4,6 +4,8 @@ import {
   getAllSumPlanService,
   getAllSumActualService,
   getAllSumDefectService,
+  getEffService,
+  getlineEffService,
 } from "../models/productModel.js";
 
 // Standardized response function
@@ -74,6 +76,32 @@ export const getAllSumDefect = async (req, res, next) => {
     const product = await getAllSumDefectService(
       req.params.id,
       req.params.date_stamp
+    );
+
+    if (!product) return handleResponse(res, 404, "Runner not found");
+    handleResponse(res, 200, "runner fetch successfully", product);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const getEff = async (req, res, next) => {
+  try {
+    const product = await getEffService(req.params.id, req.params.date_stamp);
+
+    if (!product) return handleResponse(res, 404, "Runner not found");
+    handleResponse(res, 200, "runner fetch successfully", product);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const getLineEff = async (req, res, next) => {
+  try {
+    const product = await getlineEffService(
+      req.params.id,
+      req.params.date_stamp,
+      req.params.line
     );
 
     if (!product) return handleResponse(res, 404, "Runner not found");
