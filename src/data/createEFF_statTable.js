@@ -8,7 +8,7 @@ const createEFF_statTable = async () => {
     userId SERIAL,
     product VARCHAR(100),
     downtime INTERVAL,
-    availability INTERVAL,
+    availability FLOAT,
     eff FLOAT,
     performance FLOAT,
     quality FLOAT,

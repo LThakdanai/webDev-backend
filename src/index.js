@@ -25,16 +25,29 @@ app.use(cors());
 app.use("/api", userRoutes, dataRoutes);
 
 //create table before starting server
-createUserTable();
-createRunnerTable();
-createProcess_dataTable();
-createProduct_dataTable();
-createEFF_statTable();
+const startServer = async () => {
+  try {
+    await createUserTable();
+    await createProcess_dataTable();
+    await createRunnerTable();
+    await createProduct_dataTable();
+    await createEFF_statTable();
+
+    // Start server after tables are ready
+    app.listen(port, () => {
+      console.log(`Listen port ${port}`);
+    });
+  } catch (error) {
+    console.error("Error setting up database tables:", error);
+  }
+};
+
+startServer();
 
 //Error handling middleware
 app.use(errorHandling);
 
-//Testing Proges connection
+//Testing ProgPN-000001ces connection
 //app.get("/", async (req, res) => {
 //  const result = await pool.query("SELECT current_database()");
 // res.send(`the database name is : ${result.rows[0].current_database}`);

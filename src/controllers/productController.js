@@ -4,8 +4,10 @@ import {
   getAllSumPlanService,
   getAllSumActualService,
   getAllSumDefectService,
-  getEffService,
   getlineEffService,
+  getEffProductService,
+  getSumActualByTimeService,
+  getSumPlanByTimeService,
 } from "../models/productModel.js";
 
 // Standardized response function
@@ -85,9 +87,12 @@ export const getAllSumDefect = async (req, res, next) => {
   }
 };
 
-export const getEff = async (req, res, next) => {
+export const getEffProduct = async (req, res, next) => {
   try {
-    const product = await getEffService(req.params.id, req.params.date_stamp);
+    const product = await getEffProductService(
+      req.params.id,
+      req.params.date_stamp
+    );
 
     if (!product) return handleResponse(res, 404, "Runner not found");
     handleResponse(res, 200, "runner fetch successfully", product);
@@ -102,6 +107,38 @@ export const getLineEff = async (req, res, next) => {
       req.params.id,
       req.params.date_stamp,
       req.params.line
+    );
+
+    if (!product) return handleResponse(res, 404, "Runner not found");
+    handleResponse(res, 200, "runner fetch successfully", product);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const getSumPlanByTime = async (req, res, next) => {
+  try {
+    const product = await getSumPlanByTimeService(
+      req.params.id,
+      req.params.date_stamp,
+      req.params.time_start,
+      req.params.time_end
+    );
+
+    if (!product) return handleResponse(res, 404, "Runner not found");
+    handleResponse(res, 200, "runner fetch successfully", product);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const getSumActualByTime = async (req, res, next) => {
+  try {
+    const product = await getSumActualByTimeService(
+      req.params.id,
+      req.params.date_stamp,
+      req.params.time_start,
+      req.params.time_end
     );
 
     if (!product) return handleResponse(res, 404, "Runner not found");

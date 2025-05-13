@@ -2,11 +2,11 @@ import pool from "../config/db.js";
 
 const createProcessDataTable = async () => {
   const queryText = `CREATE TABLE IF NOT EXISTS process_data (
-    runner_id SERIAL,
+    runner_id SERIAL PRIMARY KEY,
     product_number VARCHAR(50) UNIQUE,
     date_stamp DATE DEFAULT NOW(),
     time_stamp TIME DEFAULT NOW(),
-    userId SERIAL,
+    userId INTEGER,
     ct1 FLOAT,
     ct2 FLOAT,
     ct3 FLOAT,
@@ -19,9 +19,8 @@ const createProcessDataTable = async () => {
     plt2 BOOLEAN,
     plt3 BOOLEAN,
     status_update BOOLEAN,
-    PRIMARY KEY (product_number, date_stamp, time_stamp),
-    FOREIGN KEY (runner_id) REFERENCES runner(runner_id),
-    FOREIGN KEY (userId) REFERENCES users(id)
+    FOREIGN KEY (userId) REFERENCES users(id),
+    UNIQUE (product_number, date_stamp, time_stamp)
   );`;
 
   try {
